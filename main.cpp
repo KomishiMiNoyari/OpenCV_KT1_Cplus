@@ -44,7 +44,10 @@ int main() {
             int x = frame.cols - logo.cols - 20;
             int y = 20;
 
-            if (x >= 0 && y >= 0 && x + logo.cols <= frame.cols && y + logo.rows <= frame.rows) {
+            bool fitsX = (x >= 0) && (x + logo.cols <= frame.cols);
+            bool fitsY = (y >= 0) && (y + logo.rows <= frame.rows);
+
+            if (fitsX && fitsY) {
                 cv::Mat roi = frame(cv::Rect(x, y, logo.cols, logo.rows));
                 cv::addWeighted(logo, 0.7, roi, 0.3, 0.0, roi);
             }
